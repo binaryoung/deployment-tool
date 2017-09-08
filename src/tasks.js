@@ -15,8 +15,8 @@ function notifyViaEmail(
     port: 465,
     secure: true,
     auth: {
-      user: process.env.STMP_USER || 'foo@bar.com',
-      pass: process.env.STMP_PASSWORD || 'secret'
+      user: process.env.SMTP_USER || 'foo@bar.com',
+      pass: process.env.SMTP_PASSWORD || 'secret'
     }
   })
 
