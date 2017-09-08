@@ -46,10 +46,15 @@ function sendSuccessResponse(response) {
   send(response, 200, { success: true })
 }
 
+function sendFailedDeployResponse(response, err) {
+  send(response, 400, { error: err })
+}
+
 export {
   validateRequest,
   verifySignature,
   sendBadRequestResponse,
   sendPingEventResponse,
-  sendSuccessResponse
+  sendSuccessResponse,
+  sendFailedDeployResponse
 }

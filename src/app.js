@@ -2,9 +2,10 @@ import {
   validateRequest,
   sendBadRequestResponse,
   sendPingEventResponse,
-  sendSuccessResponse
+  sendSuccessResponse,
+  sendFailedDeployResponse
 } from './server'
-import { notifyViaEmail } from './tasks'
+import { redeploySite, log } from './tasks'
 
 export default async (request, response) => {
   let event =
@@ -12,6 +13,11 @@ export default async (request, response) => {
 
   if (!await validateRequest(request)) return sendBadRequestResponse(response)
   if (event === 'ping') return sendPingEventResponse(response)
-  //TODO task logic
-  return sendSuccessResponse(response)
+
+  try {
+    redeploySite()
+    return sendSuccessResponse(response)
+  } catch (error) {
+    return sendFailedDeployResponse(response, error)
+  }
 }
