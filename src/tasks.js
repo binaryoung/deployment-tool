@@ -11,10 +11,15 @@ function notifyViaEmail(
   let receiver = to || process.env.NOTIFICATION_TO || 'foo@bar.com'
 
   let transporter = nodemailer.createTransport({
-    sendmail: true,
-    newline: 'unix',
-    path: '/usr/sbin/sendmail'
+    host: 'smtp.exmail.qq.com',
+    port: 465,
+    secure: true,
+    auth: {
+      user: process.env.STMP_USER || 'foo@bar.com',
+      pass: process.env.STMP_PASSWORD || 'secret'
+    }
   })
+
   transporter.sendMail(
     {
       from: sender,
