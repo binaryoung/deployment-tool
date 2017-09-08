@@ -1,5 +1,5 @@
 //Bootstrap .env
-let envPath = require('path').join(__dirname, '../')
+let envPath = require('path').join(__dirname, '../', '.env')
 require('dotenv').config({ path: envPath })
 
 //Bootstrap ESM loader.Long Live ES Modules !
