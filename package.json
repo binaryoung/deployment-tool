@@ -9,14 +9,16 @@
   "dependencies": {
     "@std/esm": "^0.8.2",
     "dotenv": "^4.0.0",
-    "micro": "^8.0.4"
+    "micro": "^8.0.4",
+    "nodemailer": "^4.1.0"
   },
   "scripts": {
-    "serve": "micro"
+    "serve": "micro -p 3024"
   },
   "@std/esm": {
     "esm": "js",
     "cjs": true,
-    "await": true
+    "await": true,
+    "gz": true
   }
 }
