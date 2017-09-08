@@ -1,6 +1,7 @@
 import url from 'url'
 import crypto from 'crypto'
 import { buffer, text, json, send } from 'micro'
+import { notifyViaEmail } from 'tasks'
 
 async function validateRequest(request) {
   let requestUrl = url.parse(request.url)
@@ -48,4 +49,5 @@ export default async (request, response) => {
   if (!await validateRequest(request)) return sendBadRequestResponse(response)
   if (event === 'ping') return sendPingEventResponse(response)
   //TODO task logic
+  return
 }
