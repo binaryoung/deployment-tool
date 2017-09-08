@@ -9,14 +9,16 @@ function notifyViaEmail(
 ) {
   let sender = from || process.env.NOTIFICATION_FROM || 'foo@bar.com'
   let receiver = to || process.env.NOTIFICATION_TO || 'foo@bar.com'
+  let smtpUser = process.env.SMTP_USER || 'foo@bar.com'
+  let smtpPassword = process.env.SMTP_PASSWORD || 'secret'
 
   let transporter = nodemailer.createTransport({
     host: 'smtp.exmail.qq.com',
     port: 465,
     secure: true,
     auth: {
-      user: process.env.SMTP_USER || 'foo@bar.com',
-      pass: process.env.SMTP_PASSWORD || 'secret'
+      user: smtpUser,
+      pass: smtpPassword
     }
   })
 
@@ -40,7 +42,7 @@ function notifyFailedDeploy(err, stdout, stderr) {
   错误: ${err}
   输出错误： ${stderr}
   详细输出： ${stdout}
-  时间： ${new Date().getTime()}
+  时间： ${new Date()}
   `
   )
 }
@@ -49,7 +51,7 @@ function notifySucceededDeploy() {
   notifyViaEmail(
     '部署 xiayang.me 成功',
     `
-  时间： ${new Date().getTime()}
+  时间： ${new Date()}
   `
   )
 }
