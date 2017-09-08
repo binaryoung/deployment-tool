@@ -28,7 +28,7 @@ function notifyViaEmail(
       text: text
     },
     (error, info) => {
-      log(`Whoops.Something Wrong, error: ${error},info: ${info}`)
+      log(`Whoops.Something Wrong.`, error, info)
     }
   )
 }
