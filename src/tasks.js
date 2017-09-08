@@ -21,7 +21,13 @@ function notifyViaEmail(
       text: text
     },
     (error, info) => {
-      console.log(`Whoops.Something Wrong, error: ${error},info: ${info}`)
+      log(`Whoops.Something Wrong, error: ${error},info: ${info}`)
     }
   )
 }
+
+function log(...parameter) {
+  console.log(...parameter)
+}
+
+export { notifyViaEmail, log }
