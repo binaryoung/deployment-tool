@@ -1,0 +1,22 @@
+{
+  "name": "deployment-tool",
+  "version": "1.0.0",
+  "description": "Deployment tool for xiayang.me site",
+  "main": "index.js",
+  "repository": "https://github.com/binaryoung/deployment-tool.git",
+  "author": "young <me@xiayang.me>",
+  "license": "MIT",
+  "dependencies": {
+    "@std/esm": "^0.8.2",
+    "dotenv": "^4.0.0",
+    "micro": "^8.0.4"
+  },
+  "scripts": {
+    "serve": "micro"
+  },
+  "@std/esm": {
+    "esm": "js",
+    "cjs": true,
+    "await": true
+  }
+}
