@@ -61,7 +61,7 @@ function changeDirectory() {
 function redeploySite() {
   const command =
     changeDirectory() +
-    'git pull origin master && yarn build && yarn start && pm2 restart xiayang.me'
+    'git pull origin master && yarn build && pm2 restart xiayang.me'
 
   exec(command, function(error, stdout, stderr) {
     if (error) {
