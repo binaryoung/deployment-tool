@@ -40,9 +40,15 @@ function notifyFailedDeploy(error, stdout, stderr) {
   notifyViaEmail(
     'xiayang.me 部署失败',
     `
-  错误: ${error}
-  输出错误： ${stderr}
-  详细输出： ${stdout}
+  错误: 
+  ${error}
+
+  输出错误:
+  ${stderr}
+
+  详细输出:
+  ${stdout}
+
   时间： ${now()}
   `
   )
@@ -53,7 +59,9 @@ function notifySucceededDeploy(stdout) {
     'xiayang.me 部署成功',
     `
   时间： ${now()}
-  详细输出： ${stdout}
+
+  详细输出：
+  ${stdout}
   `
   )
 }
