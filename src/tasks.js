@@ -72,8 +72,8 @@ function changeDirectory() {
   return `cd ${directory}`
 }
 
-function yarnUpgrade() {
-  return 'yarn upgrade'
+function yarnInstall() {
+  return 'yarn'
 }
 
 function dependencyWasUpdated(payload) {
@@ -92,7 +92,7 @@ function redeploySite(payload) {
     'yarn build',
     'pm2 restart xiayang.me'
   ]
-  dependencyWasUpdated(payload) && commands.splice(1, 0, yarnUpgrade())
+  dependencyWasUpdated(payload) && commands.splice(1, 0, yarnInstall())
   commands.unshift(changeDirectory())
 
   exec(commands.join(' && '), function(error, stdout, stderr) {
