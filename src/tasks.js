@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer'
+import moment from 'moment'
 import { exec } from 'child_process'
 
 function notifyViaEmail(
@@ -42,7 +43,7 @@ function notifyFailedDeploy(err, stdout, stderr) {
   错误: ${err}
   输出错误： ${stderr}
   详细输出： ${stdout}
-  时间： ${new Date()}
+  时间： ${now()}
   `
   )
 }
@@ -51,13 +52,18 @@ function notifySucceededDeploy() {
   notifyViaEmail(
     '部署 xiayang.me 成功',
     `
-  时间： ${new Date()}
+  时间： ${now()}
   `
   )
 }
 
 function log(...parameter) {
   console.log(...parameter)
+}
+
+function now() {
+  moment.locale('zh-cn')
+  return moment().format('LLLL')
 }
 
 function changeDirectory() {

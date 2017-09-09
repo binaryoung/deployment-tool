@@ -10,6 +10,7 @@
     "@std/esm": "^0.8.2",
     "dotenv": "^4.0.0",
     "micro": "^8.0.4",
+    "moment": "^2.18.1",
     "nodemailer": "^4.1.0"
   },
   "devDependencies": {
