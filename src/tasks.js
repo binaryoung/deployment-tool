@@ -106,7 +106,7 @@ function redeploySite(payload) {
   commands.unshift(changeDirectory())
 
   exec(commands.join(' && '), function(error, stdout, stderr) {
-    if (error || stderr) {
+    if (error) {
       notifyFailedDeploy(error, stdout, stderr)
       throw error
     } else {
