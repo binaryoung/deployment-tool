@@ -73,7 +73,7 @@ function log(...parameter) {
 function now() {
   moment.locale('zh-cn')
   return moment()
-    .zone('+08:00')
+    .utcOffset('+08:00')
     .format('LLLL')
 }
 
