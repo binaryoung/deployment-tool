@@ -50,11 +50,16 @@ function sendFailedDeployResponse(response, err) {
   send(response, 400, { error: err })
 }
 
+async function eventPayload(request) {
+  return await json(request)
+}
+
 export {
   validateRequest,
   verifySignature,
   sendBadRequestResponse,
   sendPingEventResponse,
   sendSuccessResponse,
-  sendFailedDeployResponse
+  sendFailedDeployResponse,
+  eventPayload
 }

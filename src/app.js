@@ -3,9 +3,10 @@ import {
   sendBadRequestResponse,
   sendPingEventResponse,
   sendSuccessResponse,
-  sendFailedDeployResponse
+  sendFailedDeployResponse,
+  eventPayload
 } from './server'
-import { redeploySite, log } from './tasks'
+import { redeploySite } from './tasks'
 
 export default async (request, response) => {
   let event =
@@ -15,7 +16,8 @@ export default async (request, response) => {
   if (event === 'ping') return sendPingEventResponse(response)
 
   try {
-    redeploySite()
+    let payload = await eventPayload(request)
+    redeploySite(payload)
     return sendSuccessResponse(response)
   } catch (error) {
     return sendFailedDeployResponse(response, error)

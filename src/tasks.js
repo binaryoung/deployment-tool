@@ -36,11 +36,11 @@ function notifyViaEmail(
   )
 }
 
-function notifyFailedDeploy(err, stdout, stderr) {
+function notifyFailedDeploy(error, stdout, stderr) {
   notifyViaEmail(
-    '部署 xiayang.me 失败',
+    'xiayang.me 部署失败',
     `
-  错误: ${err}
+  错误: ${error}
   输出错误： ${stderr}
   详细输出： ${stdout}
   时间： ${now()}
@@ -48,11 +48,12 @@ function notifyFailedDeploy(err, stdout, stderr) {
   )
 }
 
-function notifySucceededDeploy() {
+function notifySucceededDeploy(stdout) {
   notifyViaEmail(
-    '部署 xiayang.me 成功',
+    'xiayang.me 部署成功',
     `
   时间： ${now()}
+  详细输出： ${stdout}
   `
   )
 }
@@ -68,22 +69,40 @@ function now() {
 
 function changeDirectory() {
   let directory = process.env.SITE_PATH || '~/code/site'
-  return `cd ${directory} && `
+  return `cd ${directory}`
 }
 
-function redeploySite() {
-  const command =
-    changeDirectory() +
-    'git pull origin master && yarn build && pm2 restart xiayang.me'
+function yarnUpgrade() {
+  return 'yarn upgrade'
+}
 
-  exec(command, function(error, stdout, stderr) {
+function dependencyWasUpdated(payload) {
+  let modified = payload.commits
+    .map(commit => commit.modified)
+    .reduce((previous, current) => {
+      return previous.contact(current)
+    })
+
+  return modified.includes('package.json')
+}
+
+function redeploySite(payload) {
+  let commands = [
+    'git pull origin master',
+    'yarn build',
+    'pm2 restart xiayang.me'
+  ]
+  dependencyWasUpdated(payload) && commands.splice(1, 0, yarnUpgrade())
+  commands.unshift(changeDirectory())
+
+  exec(commands.join(' && '), function(error, stdout, stderr) {
     if (error) {
       notifyFailedDeploy(error, stdout, stderr)
       throw error
     } else {
-      notifySucceededDeploy()
+      notifySucceededDeploy(stdout)
     }
   })
 }
 
-export { log, redeploySite }
+export { redeploySite }
