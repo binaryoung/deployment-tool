@@ -12,8 +12,12 @@
     "micro": "^8.0.4",
     "nodemailer": "^4.1.0"
   },
+  "devDependencies": {
+    "micro-dev": "^1.2.2"
+  },
   "scripts": {
-    "serve": "micro -p 3024"
+    "serve": "micro -p 3024",
+    "dev": "micro-dev -p 3024"
   },
   "@std/esm": {
     "esm": "js",
